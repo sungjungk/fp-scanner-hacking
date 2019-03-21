@@ -6,7 +6,7 @@ It is a PoC code for de-obfuscating fingerprint image from libfprint/uru4000 tha
 * Unfortunately, it does not comply the above criteria.
   1. Keys used for obfuscating fingerprint image exhibit cleartext when fingerpint scanner device transfers a fingerprint image, that is just scanned, to the libfprint/uru4000 driver.
   2. Random seeds for obfuscating fingerprint image are always generated the same sequence of numbers each time since it is generated from rand() in libc by default.
-* Upon this, we perform a PoC for de-obfuscating finerprint image after MITMing using above vulnearabilities.
+* Upon this, we perform a PoC for de-obfuscating finerprint image after MITMing using above vulnerabilities.
 
 # De-obfuscating Procedure
 * During enrolling or verifying fingerprint via libfprint, we retrieved two items immediately after capturing on the USB device; encrypted/obfuscated fingerprint image and cleartext formed key.
