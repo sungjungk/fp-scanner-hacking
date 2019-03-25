@@ -80,29 +80,33 @@ restore_image(raw_img_t *raw_img)
 }
 
 static uint32_t 
-key_gen(char *argv[], int i)
+key_gen(char *argv[])
 {
-  gint64 key_byte[4];
-  uint32_t key = 0;
-  /* 
-   * XXX: We can easily gather this predictable seed value 
-   *      since it is generated from rand() in libc by default
-   */
-  uint32_t seed[END_OF_SEED_DICTIONARY] = {1804289383, 846930886, 1681692777, 
-                                           1714636915, 1957747793};
+  gint64 key_byte[4], seed_byte[4];
+  uint32_t key_val = 0, seed_val = 0;
 
-  key_byte[0] = g_ascii_strtoull(argv[1], NULL, 16);
-  key_byte[1] = g_ascii_strtoull(argv[2], NULL, 16);
-  key_byte[2] = g_ascii_strtoull(argv[3], NULL, 16);
-  key_byte[3] = g_ascii_strtoull(argv[4], NULL, 16);
+  seed_byte[0] = g_ascii_strtoull(argv[1], NULL, 16);
+  seed_byte[1] = g_ascii_strtoull(argv[2], NULL, 16);
+  seed_byte[2] = g_ascii_strtoull(argv[3], NULL, 16);
+  seed_byte[3] = g_ascii_strtoull(argv[4], NULL, 16);
 
-  key = key_byte[0];
-  key |= key_byte[1] << 8;
-  key |= key_byte[2] << 16;
-  key |= key_byte[3] << 24;
-  key ^= seed[i];
+  seed_val = seed_byte[0];
+  seed_val |= seed_byte[1] << 8;
+  seed_val |= seed_byte[2] << 16;
+  seed_val |= seed_byte[3] << 24;
 
-  return key;
+  key_byte[0] = g_ascii_strtoull(argv[5], NULL, 16);
+  key_byte[1] = g_ascii_strtoull(argv[6], NULL, 16);
+  key_byte[2] = g_ascii_strtoull(argv[7], NULL, 16);
+  key_byte[3] = g_ascii_strtoull(argv[8], NULL, 16);
+
+  key_val = key_byte[0];
+  key_val |= key_byte[1] << 8;
+  key_val |= key_byte[2] << 16;
+  key_val |= key_byte[3] << 24;
+  key_val ^= seed_val;
+
+  return key_val;
 }
 
 int 
@@ -120,8 +124,8 @@ main(int argc, char *argv[])
 
   g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
-  if (5 != argc) {
-    g_print ("Usage: %s key_byte[0] key_byte[1] key_byte[2] key_byte[3]\n", argv[0]);
+  if (9 != argc) {
+    g_print ("Usage: %s seed[0-3] key_byte[0-3]\n", argv[0]);
     return EXIT_FAILURE;
   }
 
@@ -131,25 +135,23 @@ main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  for (i = 0; i < END_OF_SEED_DICTIONARY; i++) {
-    key = key_gen(argv, i);
-    raw_img = decode_image(buf, key);
-    if (!raw_img) {
-      g_warning("fail to decode_image");
-      return EXIT_FAILURE;
-    }
-
-    fp_img = restore_image(raw_img);
-    if (!fp_img) {
-      g_warning("fail to restore_image");
-      return EXIT_FAILURE;
-    }
-
-    file_name = g_strdup_printf("%d_encoded_finger.pgm", i);
-    image_save(fp_img, file_name);
-    
-    g_free(file_name);
+  key = key_gen(argv);
+  raw_img = decode_image(buf, key);
+  if (!raw_img) {
+    g_warning("fail to decode_image");
+    return EXIT_FAILURE;
   }
+
+  fp_img = restore_image(raw_img);
+  if (!fp_img) {
+    g_warning("fail to restore_image");
+    return EXIT_FAILURE;
+  }
+
+  file_name = g_strdup_printf("%d_encoded_finger.pgm", i);
+  image_save(fp_img, file_name);
+
+  g_free(file_name);
 
   g_free(buf);
 
