@@ -27,9 +27,6 @@ You require the following to build this project:
 * glib-2.0
 
 # Demo video
-* On Debian 9:  
-[![Video Label](https://img.youtube.com/vi/Grirez2xeas/0.jpg)](https://youtu.be/Grirez2xeast=0s)
-
 * On Windows 10:   
 [![Video Label](https://img.youtube.com/vi/wEXJDyEOatM/0.jpg)](https://youtu.be/wEXJDyEOatM=0s)
 
