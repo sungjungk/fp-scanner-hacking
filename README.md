@@ -9,16 +9,13 @@ After then, the encrypted/obfuscated fingerprint image and the generated key are
 Finally, the driver do de-obfuscate the image using provided key from device and salt that was held before.
 
 # Vulnerability 
-The key and salt should remain encrypted during transfer operation.
+The key and salt should remain encrypted during transfer operation (CWE-311: Missing Encryption of Sensitive Data).
 Unfortunately, it does not comply this criteria.
 Key and salt used for obfuscating fingerprint image exhibit cleartext when fingerprint scanner device transfers a fingerprint image, that is just scanned, to the driver. 
-(CWE-311: Missing Encryption of Sensitive Data)
-
-Upon this, we could perform a PoC for de-obfuscating fingerprint image after MITMing using above vulnerabilities. (CWE-200: Information Disclosure)
 
 # Attack Vector 
 During enrolling or verifying fingerprint, we retrieved three items immediately after capturing on the USB device; encrypted/obfuscated fingerprint image, cleartext formed key and salt.
-After then, we can de-obfuscate the encrypted/obfuscated fingerprint image using retrieved cleartext formed key and reproducible salt value.
+After then, we can de-obfuscate the encrypted/obfuscated fingerprint image using retrieved cleartext formed key and salt.
 
 # How to build
 You require the following to build this project:
