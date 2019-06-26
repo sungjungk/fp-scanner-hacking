@@ -21,7 +21,7 @@ Initialization vector is always used the same sequence of numbers each time.
 
 # Attack Vector 
 An attacker who sniffs encrypted fingerprint image can easily decrypt the fingerprint image using the key and initialization vector.
-Moreover, it is easy to conduct chosen-plaintext attacks or dictionary attacks when it uses the same initialization vector.
+Moreover, it is easy to perform the above attack by using reproducible initial vector.
 
 # How to build
 You require the following to build this project:  
@@ -35,8 +35,8 @@ It is a PoC for de-obfuscating encrypted fingerprint image.
   - In Linux:  
     [![Video Label](https://img.youtube.com/vi/Grirez2xeas/0.jpg)](https://youtu.be/Grirez2xeast=0s)  
 - Using cleartext key & reproducible initialization vector  
-  - In Linux (libfprint 0.99):  
-    [![Video Label](https://img.youtube.com/vi/TyHRVvkDCHo/0.jpg)](https://youtu.be/TyHRVvkDCHo=0s)  
   - In Windows (WBF 5.0.0.5):  
     [![Video Label](https://img.youtube.com/vi/g-kI5P4HFN0/0.jpg)](https://youtu.be/g-kI5P4HFN0=0s)
+  - In Linux (libfprint 0.99):  
+    [![Video Label](https://img.youtube.com/vi/TyHRVvkDCHo/0.jpg)](https://youtu.be/TyHRVvkDCHo=0s)  
 
