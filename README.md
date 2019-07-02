@@ -30,8 +30,8 @@ The initialization vector can be also extrapolated since it has been a staticall
 # Timeline
 2019-03-23: The issue has been identified, documented and reported to the vendor. -> no answer  
 2019-04-18: The issue has been reported to CERT/CC.  
-2019-04-19: CERT/CC have contacted to the vendor and demand to require immediate return with a reasonable timeline where the vendor will provide patch information. -> fail to respond  
-2019-05-04 and 2019-05-29: CERT/CC have reuiqred for a prompt response and providing a timeline for full mitigation of this vulnerability. -> fail to respond again  
+2019-04-19: CERT/CC have contacted the vendor and demanded immediate return with a reasonable timeline where the vendor will provide patch information. -> fail to respond  
+2019-05-04 and 2019-05-29: CERT/CC have re-contacted the vendor and re-demanded a prompt response and providing a timeline for full mitigation of this vulnerability. -> fail to respond again  
 2019-06-13: CERT/CC have recommended choosing a target date for public disclosure and proceeding with disclosure.  
 2019-06-13: CVE-2019-12813 has been assigned.  
 
